@@ -1,5 +1,5 @@
 # main menu/navigation
-
+₹
 class Main:
     def __init__(self):
         pass

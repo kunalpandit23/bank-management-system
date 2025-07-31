@@ -34,7 +34,6 @@ class Main(Admin, Customer, Account):
 
 
 
-
 main = Main()
 
 main.main_dashboard()
