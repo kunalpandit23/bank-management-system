@@ -1,0 +1,46 @@
+# main menu/navigation
+
+class Main:
+    def __init__(self):
+        pass
+    def Login(self):
+        print("login successfully")
+        
+    def SignUp(self):
+        print("SignUp Successfully")
+
+    def Exit(self):
+        print("Exit Successfully")
+
+
+m = Main()
+m.Login()
+m.SignUp()
+m.Exit()
+
+print("Choose any: ")
+user_input = input("1. Login \n2. Sign Up \n3. Exit\n").strip().lower()
+
+
+if user_input == "login" or user_input == "1":
+    m.Login()
+elif user_input == "signup" or "2":
+    m.SignUp()
+elif user_input == "exit" or "3":
+    m.Exit()
+else:
+    print("INVAID INPUT")
+
+    # another_input = input("Enter [0] for Go to the back page:")
+
+        # if another_input == "0" or "back":
+        #     continue
+        # else:
+        #     break
+
+
+
+
+
+
+

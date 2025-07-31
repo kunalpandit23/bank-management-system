@@ -1,0 +1,54 @@
+        ┌────────────────────┐
+        │   Start Program    │
+        └────────┬───────────┘
+                 ↓
+      ┌───────────────────────┐
+      │   Main Menu           │
+      │ 1. Login              │
+      │ 2. Sign Up (Customer) │
+      │ 3. Exit               │
+      └────────┬──────────────┘
+               ↓
+       ┌──────────────┐
+       │ Login Input  │
+       └────┬────┬────┘
+            ↓    ↓
+     ┌────Admin │ Customer────┐
+     ↓                        ↓
+
+┌─────────────────┐     ┌────────────────────────┐
+│   Admin Panel   │     │   Customer Dashboard   │
+└──────┬──────────┘     └────────┬───────────────┘
+       ↓                         ↓
+
+ADMIN OPTIONS:              CUSTOMER OPTIONS:
+1. View All Accounts        1. View Balance
+2. Search Account           2. Deposit Money
+3. Delete Account           3. Withdraw Money
+4. View All Transactions    4. Fund Transfer
+5. Total Bank Balance       5. View Statement
+6. Exit to Main Menu        6. Update Details
+                            7. Close Account
+                            8. Exit to Main Menu
+
+       ↓                         ↓
+ ┌────────────┐           ┌────────────┐
+ │  Perform   │           │  Perform   │
+ │  Selected  │           │  Selected  │
+ │  Operation │           │  Operation │
+ └─────┬──────┘           └─────┬──────┘
+       ↓                         ↓
+   ┌────────┐               ┌────────┐
+   │  Back  │◄──────────────│ Done   │
+   │ to Menu│               └────────┘
+   └────────┘
+       ↓
+ ┌───────────────┐
+ │   Logout or   │
+ │   Exit App    │
+ └──────┬────────┘
+        ↓
+   ┌──────────┐
+   │   End    │
+   └──────────┘
+
