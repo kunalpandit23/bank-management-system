@@ -48,6 +48,7 @@ class Account():
             if confirm == "yes":
                 with open("db/customers.json", "w") as file:
                     json.dump(self.Customer, file, indent=4)
+                    break
             else:
                 print("Account Not Created.(Try again) ")
                 break

@@ -26,13 +26,10 @@ class Main(Admin, Customer, Account):
             elif user_input == "signup" or user_input == "2":
                 main.CustomerInfo()
 
-                    
+                  
             elif user_input == "exit" or user_input == "3":
                 print("\nExit successfully... ")
                 
-
-
-
 
 main = Main()
 

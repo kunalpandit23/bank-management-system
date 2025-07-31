@@ -27,6 +27,7 @@ class Customer(Account):
                     self.close_account()
                     break
                 elif another_input in ["exit", "5"]:
+                    self.ExitToMainMenu()
                     print("Exit Successful")
                     break
                 else:
