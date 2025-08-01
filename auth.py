@@ -1,10 +1,10 @@
 # login/signup
 import json
-from admin_panel import Admin
-from customer_dashboard import Customer
+from admin_panel import AdminMenu
+from customer_dashboard import CustomerMenu
 from account import Account
 
-class Auth(Admin, Customer, Account):
+class Auth(AdminMenu, CustomerMenu, Account):
     def Admin_login(self):
         print("----------------------------------------------------------")
         print("1. Login\n2. Forgot Password")

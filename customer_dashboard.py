@@ -1,57 +1,27 @@
 import json
 
 class Customer():
-
-    def customer_options(self):
-            
-            while True: 
-                print("----------------------------------------------------------")          
-                print("1. Deposit\n2. Withdraw\n3. Check Balance\n4. Close Account\n5. Exit")
-                print("----------------------------------------------------------")
-
-                another_input = input().strip().lower()      
-
-                if another_input in ["deposit", "1"]:
-                    self.deposit()
-                elif another_input in ["withdraw", "2"]:
-                    self.withdraw()
-                elif another_input in ["check balance","checkbalance", "3"]:
-                    self.view_balance()
-                elif another_input in ["close account", "checkaccount", "4"]:
-                    self.close_account()
-                    break
-                elif another_input in ["exit", "5"]:
-                    self.ExitToMainMenu()
-                    print("----------------------------------------------------------")
-                    print("         Successfully Exited")
-                    print("----------------------------------------------------------")
-
-                    break
-                else:
-                    print("----------------------------------------------------------")
-                    print("         INVALID INPUT")
-                    print("----------------------------------------------------------")
-                print("----------------------------------------------------------")
-                another_input = input("Perform another action? (yes/no): ").strip().lower()
-                print("----------------------------------------------------------")
-                if another_input != "yes":
-                    break
-        
-        
+      
     def deposit(self):
         print("----------------------------------------------------------")
         self.depositAmount = int(input("Enter Deposit Amount: "))
         print("----------------------------------------------------------")
 
-        self.data[self.Acc_no]["Balance"] = int(self.data[self.Acc_no]["Balance"]) + self.depositAmount
+        try:
+            if self.depositAmount <= 0:
+                raise Exception("Only positive Amount added")
+            else:
+                self.data[self.Acc_no]["Balance"] = int(self.data[self.Acc_no]["Balance"]) + self.depositAmount
+                print("----------------------------------------------------------")
+                print(f"        {self.depositAmount}₹ is Successfully Deposit")
+                print("----------------------------------------------------------")
 
-        print("----------------------------------------------------------")
-        print(f"        {self.depositAmount}₹ is Successfully Deposit")
-        print("----------------------------------------------------------")
-
-        with open("db/customers.json", 'w') as file:
-            json.dump(self.data, file, indent=4)
-           
+                with open("db/customers.json", 'w') as file:
+                    json.dump(self.data, file, indent=4) 
+        except Exception as e:
+            print("----------------------------------------------------------")
+            print(f"        {e}")
+            print("----------------------------------------------------------")         
         
     def withdraw(self):
         print("----------------------------------------------------------")
@@ -60,6 +30,10 @@ class Customer():
         try:
             if self.withdrawAmount > self.data[self.Acc_no]["Balance"]:
                 raise Exception("Inceficient balance")
+            
+            if self.withdrawAmount < 0:
+                raise ValueError("Negative value are not withdraw")
+            
             else:
                 self.data[self.Acc_no]["Balance"] = int(self.data[self.Acc_no]["Balance"]) - self.withdrawAmount
                 print("----------------------------------------------------------")
@@ -70,11 +44,13 @@ class Customer():
 
         except Exception as e:
             print("----------------------------------------------------------")
-            print(e)
+            print(f"        {e}")
             print("----------------------------------------------------------")
 
-
-        
+        except ValueError as e:
+            print("----------------------------------------------------------")
+            print(f"        {e}")
+            print("----------------------------------------------------------")
 
     def view_balance(self):
 
@@ -113,3 +89,39 @@ class Customer():
     def ExitToMainMenu(self):
         self.my_account()
             
+class CustomerMenu(Customer):
+
+    def customer_options(self):            
+        while True: 
+            print("----------------------------------------------------------")          
+            print("1. Deposit\n2. Withdraw\n3. Check Balance\n4. Close Account\n5. Exit")
+            print("----------------------------------------------------------")
+
+            another_input = input().strip().lower()      
+
+            if another_input in ["deposit", "1"]:
+                self.deposit()
+            elif another_input in ["withdraw", "2"]:
+                self.withdraw()
+            elif another_input in ["check balance","checkbalance", "3"]:
+                self.view_balance()
+            elif another_input in ["close account", "checkaccount", "4"]:
+                self.close_account()
+                break
+            elif another_input in ["exit", "5"]:
+                self.ExitToMainMenu()
+                print("----------------------------------------------------------")
+                print("         Successfully Exited")
+                print("----------------------------------------------------------")
+
+                break
+            else:
+                print("----------------------------------------------------------")
+                print("         INVALID INPUT")
+                print("----------------------------------------------------------")
+            print("----------------------------------------------------------")
+            another_input = input("Perform another action? (yes/no): ").strip().lower()
+            print("----------------------------------------------------------")
+            if another_input != "yes":
+                break
+        

@@ -4,41 +4,6 @@ class Admin:
     def __init__(self):
      self.AdminInfo = {}
 
-    def admin_options(self):
-
-        while True:
-            print("----------------------------------------------------------")    
-            print("1. View All Account\n2. Search Account\n3. Delete Account\n4. Check Total Bank Balance\n5. Exit")
-            print("----------------------------------------------------------")
-
-            another_input = input()
-
-            if another_input in ["viewaccount", "1"]:
-                self.ViewAllAccount()                   
-            elif another_input in ["searchaccount", "2"]:
-                self.SearchAccount()
-            elif another_input in ["deleteaccount", "3"]:
-                self.DeleteAccount()
-            elif another_input in ["check total bank balance", "4"]:
-                self.TotalBankBalance()
-            elif another_input in ["exit", "5"]:
-                print("----------------------------------------------------------")
-                print("         Successfully Exited")
-                print("----------------------------------------------------------")
-
-                break
-            else: 
-                print("----------------------------------------------------------")
-                print("         INVALID INPUT")
-                print("----------------------------------------------------------")
-
-            print("----------------------------------------------------------")
-            another_input = input("Perform another action? (yes/no): ").strip().lower()
-            print("----------------------------------------------------------")
-
-            if another_input != "yes":
-                break
- 
     def ViewAllAccount(self):
 
         with open("db/customers.json", 'r') as file:
@@ -145,3 +110,40 @@ class Admin:
     
     def ExitToMainMenu(self):
         pass
+
+class AdminMenu(Admin):
+
+    def admin_options(self):
+        while True:
+            print("----------------------------------------------------------")    
+            print("1. View All Account\n2. Search Account\n3. Delete Account\n4. Check Total Bank Balance\n5. Exit")
+            print("----------------------------------------------------------")
+
+            another_input = input()
+
+            if another_input in ["viewaccount", "1"]:
+                self.ViewAllAccount()                   
+            elif another_input in ["searchaccount", "2"]:
+                self.SearchAccount()
+            elif another_input in ["deleteaccount", "3"]:
+                self.DeleteAccount()
+            elif another_input in ["check total bank balance", "4"]:
+                self.TotalBankBalance()
+            elif another_input in ["exit", "5"]:
+                print("----------------------------------------------------------")
+                print("         Successfully Exited")
+                print("----------------------------------------------------------")
+
+                break
+            else: 
+                print("----------------------------------------------------------")
+                print("         INVALID INPUT")
+                print("----------------------------------------------------------")
+
+            print("----------------------------------------------------------")
+            another_input = input("Perform another action? (yes/no): ").strip().lower()
+            print("----------------------------------------------------------")
+
+            if another_input != "yes":
+                break
+ 
