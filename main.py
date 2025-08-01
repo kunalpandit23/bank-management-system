@@ -1,36 +1,43 @@
-from admin_panel import Admin
-from customer_dashboard import Customer
-from account import Account
-import os
 
-class Main(Admin, Customer, Account):
+from auth import Auth
+
+class Main(Auth):
 
     def main_dashboard(self):
-        
-            print("\n1. Login.\n2. Sign Up\n3. Exit")
-            user_input = input("")
+            print("----------------------------------------------------------")        
+            print("1. Login.\n2. Sign Up\n3. Exit")
+            print("----------------------------------------------------------")
 
-            if user_input == "login" or user_input == "1":
-                print("\n1. Admin Login.\n2. Customer Login\n3. Exit")
-                another_input = input("")
+            user_input = input("").strip().lower()
 
-                if another_input == "admin" or another_input == "1":
-                    main.Admin_login()
+            if user_input in ["login", "1"]:
+                print("----------------------------------------------------------")
+                print("1. Admin Login.\n2. Customer Login\n3. Exit")
+                print("----------------------------------------------------------")
 
-                elif another_input == "customer" or another_input == "2":
-                    main.my_account()
+                another_input = input("").strip().lower()
+
+                if another_input in ["admin","admin login", "1"]:
+                    self.Admin_login()
+
+                elif another_input in ["customer","customer login", "2"]:
+                    self.customer_login()
 
                 else:
-                    print("\nINVALID INPUT...")
+                    print("----------------------------------------------------------")
+                    print("         INVALID INPUT")
+                    print("----------------------------------------------------------")
 
-            elif user_input == "signup" or user_input == "2":
-                main.CustomerInfo()
+            elif user_input in ["signup", "2"]:
+                self.signup_account()
 
                   
-            elif user_input == "exit" or user_input == "3":
-                print("\nExit successfully... ")
+            elif user_input in ["exit","3"]:
+                print("----------------------------------------------------------")
+                print("         Successfully Exited")
+                print("----------------------------------------------------------")
                 
 
-main = Main()
+m = Main()
 
-main.main_dashboard()
+m.main_dashboard()

@@ -1,20 +1,14 @@
 import json
-from account import Account
 
-class Customer(Account):
+class Customer():
 
-    def my_account(self):
-        with open("db/customers.json", 'r') as file:
-                self.data = json.load(file)
+    def customer_options(self):
+            
+            while True: 
+                print("----------------------------------------------------------")          
+                print("1. Deposit\n2. Withdraw\n3. Check Balance\n4. Close Account\n5. Exit")
+                print("----------------------------------------------------------")
 
-        self.Acc_no = input("\nEnter your Account Number: ")
-        self.password = input("\nEnter your password: ")
-         
-        if self.data.get(self.Acc_no) and self.password == self.data[self.Acc_no]["Password"]:
-            print("\nLogin successful...")
-
-            while True:       
-                print("\n1. Deposit\n2. Withdraw\n3. Check Balance\n4. Close Account\n5. Exit")
                 another_input = input().strip().lower()      
 
                 if another_input in ["deposit", "1"]:
@@ -28,53 +22,84 @@ class Customer(Account):
                     break
                 elif another_input in ["exit", "5"]:
                     self.ExitToMainMenu()
-                    print("Exit Successful")
+                    print("----------------------------------------------------------")
+                    print("         Successfully Exited")
+                    print("----------------------------------------------------------")
+
                     break
                 else:
-                    print("\nINVALID INPUT...")
-        else:
-            print("\nAccount Not Found...")
+                    print("----------------------------------------------------------")
+                    print("         INVALID INPUT")
+                    print("----------------------------------------------------------")
+                print("----------------------------------------------------------")
+                another_input = input("Perform another action? (yes/no): ").strip().lower()
+                print("----------------------------------------------------------")
+                if another_input != "yes":
+                    break
+        
         
     def deposit(self):
-
+        print("----------------------------------------------------------")
         self.depositAmount = int(input("Enter Deposit Amount: "))
+        print("----------------------------------------------------------")
 
         self.data[self.Acc_no]["Balance"] = int(self.data[self.Acc_no]["Balance"]) + self.depositAmount
 
-        print("Deposit Successfully Completed....")
+        print("----------------------------------------------------------")
+        print(f"        {self.depositAmount}₹ is Successfully Deposit")
+        print("----------------------------------------------------------")
 
         with open("db/customers.json", 'w') as file:
             json.dump(self.data, file, indent=4)
            
         
     def withdraw(self):
-
+        print("----------------------------------------------------------")
         self.withdrawAmount = int(input("Enter Withdraw Amount: "))
+        print("----------------------------------------------------------")
+        try:
+            if self.withdrawAmount > self.data[self.Acc_no]["Balance"]:
+                raise Exception("Inceficient balance")
+            else:
+                self.data[self.Acc_no]["Balance"] = int(self.data[self.Acc_no]["Balance"]) - self.withdrawAmount
+                print("----------------------------------------------------------")
+                print(f"        Amount of {self.withdrawAmount}₹ is Successfully Withdraw")
+                print("----------------------------------------------------------")
+                with open("db/customers.json", 'w') as file:
+                    json.dump(self.data, file, indent=4)
 
-        self.data[self.Acc_no]["Balance"] = int(self.data[self.Acc_no]["Balance"]) - self.withdrawAmount
+        except Exception as e:
+            print("----------------------------------------------------------")
+            print(e)
+            print("----------------------------------------------------------")
 
-        print(f"\nAmount of {self.withdrawAmount}rs Successfully Withdraw....")
 
-        with open("db/customers.json", 'w') as file:
-            json.dump(self.data, file, indent=4)
-       
+        
 
     def view_balance(self):
 
-        print("\nYour Balance is:", self.data[self.Acc_no]["Balance"])
+        print("----------------------------------------------------------")
+        print(f"        Account Balance: {self.data[self.Acc_no]["Balance"]}₹")
+        print("----------------------------------------------------------")
 
     def close_account(self):
-
+        print("----------------------------------------------------------")
         confirm = input("You conform Delelte your Account (yes/no)").strip().lower()
+        print("----------------------------------------------------------")
 
         if confirm == "yes":
             del self.data[self.Acc_no]
 
             with open("db/customers.json", 'w') as file:
                 json.dump(self.data, file, indent=4)
-            print("Delete Account successfully..")
+            print("----------------------------------------------------------")
+            print("         Account is successfully deleted")
+            print("----------------------------------------------------------")
+ 
         else:
-            print("Account Not Deleted...")
+            print("----------------------------------------------------------")
+            print("         Account deleted process is canceled")
+            print("----------------------------------------------------------")
 
     def fund_transfer(self):
         pass
@@ -86,9 +111,5 @@ class Customer(Account):
         pass
 
     def ExitToMainMenu(self):
-        pass
+        self.my_account()
             
-c = Customer()
-
-# c.my_account()
-# c.deposit()

@@ -8,7 +8,7 @@ class Account():
     def __init__(self):
         self.Customer = {}
 
-    def CustomerInfo(self):
+    def CreateNewAccount(self):
         while True:
             print("\nEnter all the following details")
             Acc_No = random.randint(100000000000, 999999999999)
@@ -56,8 +56,3 @@ class Account():
 
 
             
-
-# a = Account()
-
-# a.CustomerInfo()
-# a.SaveInfo()
