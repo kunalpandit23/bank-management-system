@@ -1,10 +1,26 @@
 {
-    "1001": {
-        "Account No": 1001,
-        "Name": "KUNAL TRYAMBAK PANDIT",
-        "Password": "@kp",
-        "Balance": 16500,
+    "427468750771": {
+        "Account No": 427468750771,
+        "Name": "KUNAL PANDIT",
+        "Password": "kp",
+        "Balance": 50000,
         "Email": "kp@gmail.com",
-        "Mobile No": 7875421320
+        "Mobile No": 7578220314
+    },
+    "715515845156": {
+        "Account No": 715515845156,
+        "Name": "RAVI PANDIT",
+        "Password": "kp",
+        "Balance": 75000,
+        "Email": "RAVI@GMAIL.COM",
+        "Mobile No": 4525788963
+    },
+    "825400331241": {
+        "Account No": 825400331241,
+        "Name": "SAI NAWATHE",
+        "Password": "sai",
+        "Balance": 50000,
+        "Email": "SAI@GMAIL.COM",
+        "Mobile No": 8523658974
     }
 }

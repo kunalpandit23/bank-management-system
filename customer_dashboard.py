@@ -1,8 +1,10 @@
 import json
+from json.decoder import JSONDecodeError
 
 class Customer():
       
     def deposit(self):
+
         print("----------------------------------------------------------")
         self.depositAmount = int(input("Enter Deposit Amount: "))
         print("----------------------------------------------------------")
@@ -78,7 +80,60 @@ class Customer():
             print("----------------------------------------------------------")
 
     def fund_transfer(self):
-        pass
+        try:
+            with open("db/customers.json", 'r') as file:
+                self.data = json.load(file)
+        except (FileNotFoundError, JSONDecodeError):
+            self.data = {}
+
+        print("----------------------------------------------------------")
+        receiver_acc = input("Enter Receiver Account Number: ").strip()
+
+        try:
+            amount = int(input("Enter Amount to Transfer: "))
+        except ValueError:
+            print("----------------------------------------------------------")
+            print("         Invalid amount entered.")
+            print("----------------------------------------------------------")
+            return
+
+        print("----------------------------------------------------------")
+
+        try:
+            sender = self.data.get(self.Acc_no)
+            receiver = self.data.get(receiver_acc)
+
+            if not sender:
+                raise Exception("Your account not found.")
+            if not receiver:
+                raise Exception("Receiver account not found.")
+            if amount < 0:
+                raise ValueError("Negative amounts cannot be transferred.")
+            if int(sender["Balance"]) < amount:
+                raise Exception("Insufficient balance.")
+
+            # Perform transaction
+            sender["Balance"] = int(sender["Balance"]) - amount
+            receiver["Balance"] = int(receiver["Balance"]) + amount
+
+            print("----------------------------------------------------------")
+            print(f"        ₹{amount} successfully transferred to {receiver_acc}")
+            print("----------------------------------------------------------")
+
+            # Save updated data
+            with open("db/customers.json", 'w') as file:
+                json.dump(self.data, file, indent=4)
+
+        except Exception as e:
+            print("----------------------------------------------------------")
+            print(f"        Error: {e}")
+            print("----------------------------------------------------------")
+
+        except ValueError as ve:
+            print("----------------------------------------------------------")
+            print(f"        Error: {ve}")
+            print("----------------------------------------------------------")
+
 
     def view_statement(self):
         pass
@@ -87,14 +142,14 @@ class Customer():
         pass
 
     def ExitToMainMenu(self):
-        self.my_account()
+        pass
             
 class CustomerMenu(Customer):
 
     def customer_options(self):            
         while True: 
             print("----------------------------------------------------------")          
-            print("1. Deposit\n2. Withdraw\n3. Check Balance\n4. Close Account\n5. Exit")
+            print("1. Deposit\n2. Withdraw\n3. Check Balance\n4. Fund Transfer\n5. Close Account\n6. Exit")
             print("----------------------------------------------------------")
 
             another_input = input().strip().lower()      
@@ -105,15 +160,15 @@ class CustomerMenu(Customer):
                 self.withdraw()
             elif another_input in ["check balance","checkbalance", "3"]:
                 self.view_balance()
-            elif another_input in ["close account", "checkaccount", "4"]:
+            elif another_input in ["fund transfer", "fundtransfer", "4"]:
+                self.fund_transfer()
+            elif another_input in ["close account", "checkaccount", "5"]:
                 self.close_account()
                 break
-            elif another_input in ["exit", "5"]:
-                self.ExitToMainMenu()
+            elif another_input in ["exit", "6"]:
                 print("----------------------------------------------------------")
                 print("         Successfully Exited")
                 print("----------------------------------------------------------")
-
                 break
             else:
                 print("----------------------------------------------------------")
@@ -124,4 +179,4 @@ class CustomerMenu(Customer):
             print("----------------------------------------------------------")
             if another_input != "yes":
                 break
-        
+

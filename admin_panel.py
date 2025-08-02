@@ -1,13 +1,16 @@
 import json
+from json.decoder import JSONDecodeError
 
 class Admin:
     def __init__(self):
      self.AdminInfo = {}
 
     def ViewAllAccount(self):
-
-        with open("db/customers.json", 'r') as file:
-            data = json.load(file)
+        try: 
+            with open("db/customers.json", 'r') as file:
+                data = json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            data = {}
 
         for acc, details in data.items():
             print("----------------------------------------------------------") 
@@ -21,8 +24,11 @@ class Admin:
                  
 
     def SearchAccount(self):
-        with open("db/customers.json", 'r') as file:
-            data = json.load(file)
+        try:
+            with open("db/customers.json", 'r') as file:
+                data = json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            data = {}
 
         while True:           
             print("----------------------------------------------------------")
@@ -60,8 +66,12 @@ class Admin:
 
 
     def DeleteAccount(self):
-        with open("db/customers.json", 'r') as file:
-            data = json.load(file)
+        try:
+            with open("db/customers.json", 'r') as file:
+                data = json.load(file)
+
+        except (FileNotFoundError, json.JSONDecodeError):
+                data = {}
         print("----------------------------------------------------------")
         acc = input("Enter Account Number: ")
         print("----------------------------------------------------------")
@@ -93,8 +103,12 @@ class Admin:
 
 
     def TotalBankBalance(self):
-        with open("db/customers.json", 'r') as file:
-            self.data = json.load(file)
+        try:
+            with open("db/customers.json", 'r') as file:
+                self.data = json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            self.data = {}
+
         total = 0
         for acc, details in self.data.items():
             acc
@@ -133,8 +147,8 @@ class AdminMenu(Admin):
                 print("----------------------------------------------------------")
                 print("         Successfully Exited")
                 print("----------------------------------------------------------")
-
                 break
+
             else: 
                 print("----------------------------------------------------------")
                 print("         INVALID INPUT")
